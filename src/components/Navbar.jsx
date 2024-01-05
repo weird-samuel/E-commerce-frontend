@@ -14,10 +14,10 @@ const Navbar = () => {
               <a>All</a>
             </li>
             <li>
-              <a>Item_A</a>
+              <a>Laptop</a>
             </li>
             <li>
-              <a>Item_B</a>
+              <a>PC</a>
             </li>
           </ul>
         </details>
@@ -30,7 +30,7 @@ const Navbar = () => {
               <a>Online order</a>
             </li>
             <li>
-              <a>Table Booking</a>
+              <a>Instant Order</a>
             </li>
             <li>
               <a>Order Tracking</a>
