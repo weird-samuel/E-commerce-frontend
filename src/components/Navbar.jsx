@@ -1,24 +1,45 @@
+import { BiPhoneCall } from "react-icons/bi";
+
 const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <a>Item 1</a>
+        <a href="/">Home</a>
       </li>
-      <li>
+      <li tabIndex={0}>
         <details>
-          <summary>Parent</summary>
+          <summary>Menu</summary>
           <ul className="p-2">
             <li>
-              <a>Submenu 1</a>
+              <a>All</a>
             </li>
             <li>
-              <a>Submenu 2</a>
+              <a>Item_A</a>
+            </li>
+            <li>
+              <a>Item_B</a>
+            </li>
+          </ul>
+        </details>
+      </li>
+      <li tabIndex={0}>
+        <details>
+          <summary>Services</summary>
+          <ul className="p-2">
+            <li>
+              <a>Online order</a>
+            </li>
+            <li>
+              <a>Table Booking</a>
+            </li>
+            <li>
+              <a>Order Tracking</a>
             </li>
           </ul>
         </details>
       </li>
       <li>
-        <a>Item 3</a>
+        <a>Offers</a>
       </li>
     </>
   );
@@ -47,32 +68,62 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              {navItems}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Logo</a>
+          <a className="btn btn-ghost text-xl">
+            Logo {/* add logo later as an image*/}
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{/* nav item */}</ul>
+          <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {/* Cart btn */}
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle mr-3 items-center justify-center hidden md:flex"
+          >
+            <div className="indicator">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span className="badge badge-sm indicator-item">8</span>
+            </div>
+          </div>
+          {/* Search btn */}
+          <button className="btn btn-ghost btn-circle hidden md:flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+          {/* Contact btn */}
+          <a className="btn btn-ghost border-none outline-none rounded-full px-6 text-white flex items-center gap-2">
+            <BiPhoneCall /> Contact
+          </a>
         </div>
       </div>
     </header>
