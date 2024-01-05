@@ -1,9 +1,9 @@
-import Banner from "../../components/Banner";
+import Hero from "../../components/Hero";
 
 const Home = () => {
   return (
     <div>
-      <Banner />
+      <Hero />
     </div>
   );
 };
