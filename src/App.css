@@ -2,8 +2,27 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+header {
+    z-index: 10001 !important;
 }
 
 .section-container {
     @apply max-w-screen-2xl container mx-auto xl:px-28 px-4;
+}
+
+.subtitle {
+    @apply text-red uppercase tracking-wide font-medium text-lg;
+}
+
+.title {
+    @apply text-white text-4xl md:text-5xl font-bold my-2 leading-snug;
 }
