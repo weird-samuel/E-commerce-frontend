@@ -3,42 +3,45 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 import React from "react";
+import SpecialsCards from "../../components/SpecialsCards";
+import {} from "react-icons/fa6";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Specials = () => {
   const [specials, setSpecials] = useState([]);
   const slider = React.useRef(null);
 
   useEffect(() => {
-    fetch("/menu.json")
+    fetch("/laptops.json")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        const specials = data.filter((item) => item.category === "popular");
+        // console.log(specials);
+        setSpecials(specials);
       });
   }),
     [];
 
   const settings = {
-    dots: true,
-    infinite: false,
+    dots: false,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
     initialSlide: 0,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    infinite: true,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+          slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 1000,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
           initialSlide: 2,
         },
       },
@@ -50,39 +53,38 @@ const Specials = () => {
         },
       },
     ],
+    nextArrow: <nextArrowBtn />,
+    prevArrow: <prevArrowBtn />,
   };
 
   return (
-    <div className="section-container my-20">
-      <div className="text-left">
+    <div className="section-container my-20 relative">
+      <div className="text-left my-10">
         <p className="subtitle">Specials!</p>
         <h3 className="title md:w-[520px]">Outstanding Laptops From Us</h3>
       </div>
-      <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
-        <div>
-          <h3>7</h3>
-        </div>
-        <div>
-          <h3>8</h3>
-        </div>
+      <div className="hidden md:flex md:absolute top-8 right-3 mb-10 md:mr-24">
+        <button
+          onClick={() => slider?.current?.slickPrev()}
+          className="btn p-2 rounded-full ml-5"
+        >
+          <FaAngleLeft className="w-8 h-8 p-1" />
+        </button>
+        <button
+          onClick={() => slider?.current?.slickNext()}
+          className="btn p-2 rounded-full ml-5"
+        >
+          <FaAngleRight className="w-8 h-8 p-1" />
+        </button>
+      </div>
+      <Slider
+        ref={slider}
+        {...settings}
+        className="overflow-hidden mt-10 space-x-5"
+      >
+        {specials.map((item, index) => (
+          <SpecialsCards key={index} item={item} slider={slider} />
+        ))}
       </Slider>
     </div>
   );
