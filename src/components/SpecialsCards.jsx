@@ -24,7 +24,7 @@ const SpecialsCards = ({ item }) => {
           <img
             src={item.image}
             alt={item.image + "image"}
-            className="hover:scale-105 transition-all ease-in-out duration-500 max-w-[276px] max-h-[276px]"
+            className="hover:scale-105 transition-all ease-in-out duration-500 max-w-[180px] max-h-[180px]"
           />
         </figure>
       </Link>

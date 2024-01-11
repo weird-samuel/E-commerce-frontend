@@ -25,10 +25,10 @@ const Navbar = () => {
       </li>
       <li tabIndex={0}>
         <details>
-          <summary>Menu</summary>
+          <summary>Options</summary>
           <ul className="p-2">
             <li>
-              <a>All</a>
+              <a href="/options">All</a>
             </li>
             <li>
               <a>Laptop</a>
