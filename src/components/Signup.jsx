@@ -1,12 +1,13 @@
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
@@ -62,6 +63,12 @@ const Signup = () => {
               Log in!
             </a>
           </p>
+          <Link
+            to={"/"}
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            ✕
+          </Link>
         </form>
         <div className="text-center space-x-3 mb-5">
           <button className="btn bg-base-300 hover:text-white transition-all duration-500 btn-circle">
