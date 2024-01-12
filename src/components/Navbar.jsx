@@ -1,5 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
-import { BiPhoneCall } from "react-icons/bi";
+import { FaRegUser } from "react-icons/fa";
+import Modal from "./Modal";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
@@ -25,16 +27,16 @@ const Navbar = () => {
       </li>
       <li tabIndex={0}>
         <details>
-          <summary>Options</summary>
+          <summary>Products</summary>
           <ul className="p-2">
             <li>
               <a href="/options">All</a>
             </li>
             <li>
-              <a>Laptop</a>
+              <a>Laptops</a>
             </li>
             <li>
-              <a>PC</a>
+              <a>PC's</a>
             </li>
           </ul>
         </details>
@@ -143,10 +145,14 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          {/* Contact btn */}
-          <a className="btn btn-ghost border-none outline-none rounded-full px-6 text-white flex items-center gap-2">
-            <BiPhoneCall /> Contact
-          </a>
+          {/* Login btn */}
+          <button
+            onClick={() => document.getElementById("login_modal").showModal()}
+            className="btn btn-ghost border-none outline-none rounded-full px-6 text-white flex items-center gap-2"
+          >
+            <FaRegUser /> Login
+          </button>
+          <Modal />
         </div>
       </div>
     </header>
