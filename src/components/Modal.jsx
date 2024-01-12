@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
 
 const Modal = () => {
   const {
@@ -8,7 +10,22 @@ const Modal = () => {
     handleSubmit,
     // formState: { errors },
   } = useForm();
+
+  const { signupWithGoogle } = useContext(AuthContext);
+
   const onSubmit = (data) => console.log(data);
+
+  // google auth
+  const handleLogin = () => {
+    signupWithGoogle()
+      .then((res) => {
+        const user = res.user;
+        alert("Welcome " + user.displayName);
+      })
+      .catch((err) => {
+        alert("Error" + err.message);
+      });
+  };
 
   return (
     <div>
@@ -64,16 +81,16 @@ const Modal = () => {
                   Create One!
                 </Link>
               </p>
-              <button
+              <a
                 htmlFor="login_modal"
                 onClick={() => document.getElementById("login_modal").close()}
                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
               >
                 ✕
-              </button>
+              </a>
             </form>
             <div className="text-center space-x-3 mb-5">
-              <button className="btn btn-circle">
+              <button className="btn btn-circle" onClick={handleLogin}>
                 <FaGoogle />
               </button>
               <button className="btn btn-circle">

@@ -1,10 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
+import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
