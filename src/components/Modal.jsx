@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 
 const Modal = () => {
@@ -11,9 +11,28 @@ const Modal = () => {
     // formState: { errors },
   } = useForm();
 
-  const { signupWithGoogle } = useContext(AuthContext);
+  const { signupWithGoogle, login } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  // redirect users
+  const locatioin = useLocation();
+  const navigate = useNavigate();
+  const from = locatioin.state?.from?.pathname || "/";
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    // console.log(email, password);
+    login(email, password)
+      .then((res) => {
+        const user = res.user;
+        alert("Welcome user with email " + user.email);
+        document.getElementById("login_modal").close();
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        setErrorMessage("Provide valid login details !" || err.message);
+      });
+  };
 
   // google auth
   const handleLogin = () => {
@@ -21,6 +40,7 @@ const Modal = () => {
       .then((res) => {
         const user = res.user;
         alert("Welcome " + user.displayName);
+        document.getElementById("login_modal").close();
       })
       .catch((err) => {
         alert("Error" + err.message);
@@ -65,7 +85,12 @@ const Modal = () => {
                   </a>
                 </label>
               </div>
-              <div className="form-control mt-6">
+              {errorMessage ? (
+                <p className="text-red text-xs italic">{errorMessage}</p>
+              ) : (
+                ""
+              )}
+              <div className="form-control mt-4">
                 <input
                   type="submit"
                   value={"Login"}
