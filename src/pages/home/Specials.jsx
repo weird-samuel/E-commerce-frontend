@@ -15,7 +15,7 @@ const Specials = () => {
     fetch("/laptops.json")
       .then((res) => res.json())
       .then((data) => {
-        const specials = data.filter((item) => item.category === "popular");
+        const specials = data.filter((item) => item.category === "Home");
         // console.log(specials);
         setSpecials(specials);
       });

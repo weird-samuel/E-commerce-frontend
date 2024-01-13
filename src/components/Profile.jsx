@@ -8,7 +8,7 @@ const Profile = ({ user }) => {
   const handleLogout = () => {
     logout()
       .then(() => {
-        alert("Logged successfully");
+        alert("Logged out successfully");
       })
       .catch((err) => {
         alert("Error" + err.message);

@@ -104,34 +104,22 @@ const Options = () => {
             All
           </button>
           <button
-            onClick={() => filterItems("salad")}
-            className={selectedCategory === "salad" ? "active" : ""}
+            onClick={() => filterItems("Home")}
+            className={selectedCategory === "Home" ? "active" : ""}
           >
-            Salad
+            Home
           </button>
           <button
-            onClick={() => filterItems("pizza")}
-            className={selectedCategory === "pizza" ? "active" : ""}
+            onClick={() => filterItems("Office")}
+            className={selectedCategory === "Office" ? "active" : ""}
           >
-            Pizza
+            Office
           </button>
           <button
-            onClick={() => filterItems("soup")}
-            className={selectedCategory === "soup" ? "active" : ""}
+            onClick={() => filterItems("Gaming")}
+            className={selectedCategory === "Gaming" ? "active" : ""}
           >
-            Soups
-          </button>
-          <button
-            onClick={() => filterItems("dessert")}
-            className={selectedCategory === "dessert" ? "active" : ""}
-          >
-            Desserts
-          </button>
-          <button
-            onClick={() => filterItems("drinks")}
-            className={selectedCategory === "drinks" ? "active" : ""}
-          >
-            Drinks
+            Gaming
           </button>
         </div>
 
