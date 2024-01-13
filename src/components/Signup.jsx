@@ -13,11 +13,12 @@ const Signup = () => {
   } = useForm();
 
   const { createUser } = useContext(AuthContext);
+  const { signupWithGoogle } = useContext(AuthContext);
 
   // redirect users
-  const locatioin = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
-  const from = locatioin.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -28,7 +29,18 @@ const Signup = () => {
         alert(
           "Account for user with email " + user.email + " created successfully"
         );
-        document.getElementById("signup_modal").close();
+        navigate(from, { replace: true });
+      })
+      .catch((err) => {
+        alert("Error" + err.message);
+      });
+  };
+  // google auth
+  const handleLogin = () => {
+    signupWithGoogle()
+      .then((res) => {
+        const user = res.user;
+        alert("Welcome " + user.displayName);
         navigate(from, { replace: true });
       })
       .catch((err) => {
@@ -97,7 +109,7 @@ const Signup = () => {
         </form>
         <div className="text-center space-x-3 mb-5">
           <button className="btn bg-base-300 hover:text-white transition-all duration-500 btn-circle">
-            <FaGoogle />
+            <FaGoogle onClick={handleLogin} />
           </button>
           <button className="btn bg-base-300 hover:text-white transition-all duration-500 btn-circle">
             <FaFacebook />

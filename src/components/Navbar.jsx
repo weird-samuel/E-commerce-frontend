@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import Modal from "./Modal";
 import { AuthContext } from "../context/AuthProvider";
+import Profile from "./Profile";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
 
   const { user } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -150,12 +151,16 @@ const Navbar = () => {
             </svg>
           </button>
           {/* Login btn */}
-          <button
-            onClick={() => document.getElementById("login_modal").showModal()}
-            className="btn btn-ghost border-none outline-none rounded-full px-6 text-white flex items-center gap-2"
-          >
-            <FaRegUser /> Login
-          </button>
+          {user ? (
+            <Profile user={user} />
+          ) : (
+            <button
+              onClick={() => document.getElementById("login_modal").showModal()}
+              className="btn btn-ghost border-none outline-none rounded-full px-6 text-white flex items-center gap-2"
+            >
+              <FaRegUser /> Login
+            </button>
+          )}
           <Modal />
         </div>
       </div>
