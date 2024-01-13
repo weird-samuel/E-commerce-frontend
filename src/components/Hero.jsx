@@ -49,7 +49,7 @@ const Hero = () => {
                     <input
                       type="radio"
                       name="rating-1"
-                      className="mask mask-star bg-green"
+                      className="mask mask-star"
                     />
                   </div>
                   <p className="text-black">$80.00</p>
