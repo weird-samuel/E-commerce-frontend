@@ -11,7 +11,7 @@ const PrivateRouter = () => {
     return <Loader />;
   }
   if (user) {
-    return children;
+    // return children;
   }
   return <Navigate to="/signup" state={{ from: location }} replace></Navigate>;
 };

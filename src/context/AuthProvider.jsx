@@ -56,6 +56,7 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
         setLoading(false);
       } else {
+        setLoading(false);
         setUser(null);
       }
     });

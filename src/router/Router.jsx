@@ -4,6 +4,7 @@ import Home from "../pages/home/Home";
 import Options from "../pages/store/Options";
 import Signup from "../components/Signup";
 import UpdateProfile from "../pages/dashboard/UpdateProfile";
+import Cart from "../pages/store/Cart";
 // import PrivateRouter from "../PrivateRoute/PrivateRouter";
 
 const router = createBrowserRouter([
@@ -16,12 +17,12 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
         path: "/options",
-        element: (
-          // <PrivateRouter>
-          <Options />
-          // </PrivateRouter>
-        ),
+        element: <Options />,
       },
       {
         path: "/update-profile",
