@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 
 const Modal = () => {
@@ -14,9 +14,9 @@ const Modal = () => {
   const { signupWithGoogle, login } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState("");
   // redirect users
-  const locatioin = useLocation();
-  const navigate = useNavigate();
-  const from = locatioin.state?.from?.pathname || "/";
+  // const locatioin = useLocation();
+  // const navigate = useNavigate();
+  // const from = locatioin.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -27,7 +27,7 @@ const Modal = () => {
         const user = res.user;
         alert("Welcome user with email " + user.email);
         document.getElementById("login_modal").close();
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
       })
       .catch((err) => {
         setErrorMessage("Provide valid login details !" || err.message);

@@ -4,6 +4,7 @@ import { FaHeart } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import Swal from "sweetalert2";
+import refetch from "../hooks/UseCart";
 
 const SpecialsCards = ({ item }) => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const SpecialsCards = ({ item }) => {
   const { user } = useContext(AuthContext);
 
   // add to cart fn
-  const handleAddToCart = (item) => {
+  const handleAddToCart = () => {
     if (user && user?.email) {
       const cartItem = {
         optionItemId: _id,
@@ -26,7 +27,7 @@ const SpecialsCards = ({ item }) => {
       fetch("http://localhost:4000/cart", {
         method: "POST",
         headers: {
-          "Content-tpe": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(cartItem),
       })
