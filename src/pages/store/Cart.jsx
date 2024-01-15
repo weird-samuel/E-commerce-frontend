@@ -1,12 +1,78 @@
+/* eslint-disable no-unused-vars */
 import { FaTrash } from "react-icons/fa";
 import UseCart from "../../hooks/UseCart";
 import Swal from "sweetalert2";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 
 const Cart = () => {
   const [cart, refetch] = UseCart();
   const { user } = useContext(AuthContext);
+  const [cartItems, setCartItems] = useState([]);
+
+  // handleDecrement function
+  const handleDecrement = (item) => {
+    // console.log(item._id);
+    if (item.quantity > 1) {
+      fetch(`http://localhost:4000/cart/${item._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({ quantity: item.quantity - 1 }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const newCart = cartItems.map((cartItem) => {
+            if (cartItem.id === item._id) {
+              return {
+                ...cartItem,
+                quantity: cartItem.quantity - 1,
+              };
+            }
+            return cartItem;
+          });
+          setCartItems(newCart);
+          location.reload();
+        });
+      location.reload();
+    } else {
+      Swal.fire({
+        title: "Error!",
+        text: "Minimum quantity is 1",
+        icon: "error",
+        timer: 1500,
+      });
+    }
+  };
+
+  // handleIncrement function
+  const handleIncrement = (item) => {
+    // console.log(item._id);
+    fetch(`http://localhost:4000/cart/${item._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({ quantity: item.quantity + 1 }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const newCart = cartItems.map((cartItem) => {
+          if (cartItem.id === item._id) {
+            return {
+              ...cartItem,
+              quantity: cartItem.quantity + 1,
+            };
+          }
+          return cartItem;
+        });
+        setCartItems(newCart);
+        location.reload();
+      });
+    location.reload();
+  };
+
   // handle delete
   const handleDelete = async (item) => {
     Swal.fire({
@@ -75,15 +141,31 @@ const Cart = () => {
                         />
                       </div>
                     </div>
-                    {/* <div>
-                      <div className="font-bold">Hart Hagerty</div>
-                      <div className="text-sm opacity-50">United States</div>
-                    </div> */}
                   </div>
                 </td>
                 <td className="font-medium">{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>${item.price}</td>
+                <td>
+                  <button
+                    className="btn btn-xs"
+                    onClick={() => handleDecrement(item)}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) => console.log(e.target.value)}
+                    className="w-10 mx-2 text-center overflow-hidden appearance-none outline-none border-none bg-transparent text-white"
+                  />
+
+                  <button
+                    className="btn btn-xs"
+                    onClick={() => handleIncrement(item)}
+                  >
+                    +
+                  </button>
+                </td>
+                <td>${(item.price * item.quantity).toFixed(2)}</td>
                 <th className="">
                   <button
                     className="btn btn-ghost btn-xs"
@@ -98,7 +180,7 @@ const Cart = () => {
         </table>
       </div>
       {/* user details */}
-      <div className="my-12 flex flex-col md:flex-row justify-between items-center">
+      <div className="my-12 flex flex-col md:flex-row justify-between items-center  ">
         <div className="md:w-1/2 space-y-3">
           <h3 className="font-medium">Customer Details</h3>
           <p>
@@ -110,8 +192,15 @@ const Cart = () => {
         <div className="md:w-1/2 space-y-3">
           <h3 className="font-medium">Shopping Details</h3>
           <p>Total Items: {cart.length}</p>
-          <p>Total Price: $000</p>
-          <button className="btn btn-ghost rounded-full">Checkout</button>
+          <p>
+            Total Price: $
+            {cart
+              .reduce((total, item) => total + item.price * item.quantity, 0)
+              .toFixed(2)}
+          </p>
+          <button className="btn btn-ghost bg-green text-white rounded-lg">
+            Checkout
+          </button>
         </div>
       </div>
     </div>

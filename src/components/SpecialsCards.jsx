@@ -4,7 +4,6 @@ import { FaHeart } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import Swal from "sweetalert2";
-import refetch from "../hooks/UseCart";
 
 const SpecialsCards = ({ item }) => {
   const navigate = useNavigate();
@@ -42,6 +41,7 @@ const SpecialsCards = ({ item }) => {
               timer: 1500,
             });
           }
+          window.location.reload();
         })
         .catch((err) => {
           Swal.fire({
