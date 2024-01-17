@@ -5,9 +5,9 @@ import Options from "../pages/store/Options";
 import Signup from "../components/Signup";
 import UpdateProfile from "../pages/dashboard/UpdateProfile";
 import Cart from "../pages/store/Cart";
-import Dashboard from "../layout/DashboardLayout";
 import PrivateRouter from "../PrivateRoute/PrivateRouter";
 import DashboardLayout from "../layout/DashboardLayout";
+import Dashboard from "../pages/dashboard/admin/Dashboard";
 import Users from "../pages/dashboard/admin/Users";
 
 const router = createBrowserRouter([
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: (
       <PrivateRouter>
-        <DashboardLayout />,
+        <DashboardLayout />
       </PrivateRouter>
     ),
     children: [
