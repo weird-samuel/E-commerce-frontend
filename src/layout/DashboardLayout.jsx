@@ -123,13 +123,13 @@ const DashboardLayout = () => {
                 Manage Options
               </Link>
             </li>
-            <li>
+            <li className="mb-3">
               <Link to={"/dashboard/users"}>
                 <FaUsers />
                 All Users
               </Link>
             </li>
-
+            <hr />
             {/* shared links */}
             {sharedLinks}
           </ul>
