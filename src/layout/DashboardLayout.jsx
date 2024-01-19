@@ -1,10 +1,51 @@
 import { Link, Outlet } from "react-router-dom";
-import { MdDashboard, MdDashboardCustomize } from "react-icons/md";
+import {
+  MdDashboard,
+  MdDashboardCustomize,
+  MdOutlineCategory,
+  MdOutlineSupportAgent,
+} from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
-import { FaBriefcase, FaEdit, FaPlus, FaUser } from "react-icons/fa";
+import {
+  FaBriefcase,
+  FaEdit,
+  FaLocationArrow,
+  FaPlus,
+  FaUser,
+} from "react-icons/fa";
+import { IoHome } from "react-icons/io5";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
+// logo
 
+const sharedLinks = (
+  <>
+    <li className="mt-3">
+      <Link to={"/"}>
+        <IoHome />
+        Home
+      </Link>
+    </li>
+    <li>
+      <Link to={"/options"}>
+        <MdOutlineCategory />
+        Options
+      </Link>
+    </li>
+    <li>
+      <Link to={"/order-tracking  "}>
+        <FaLocationArrow />
+        Order Tracking
+      </Link>
+    </li>
+    <li>
+      <Link to={"/customer-support"}>
+        <MdOutlineSupportAgent />
+        Customer Support
+      </Link>
+    </li>
+  </>
+);
 const DashboardLayout = () => {
   const { logout } = useContext(AuthContext);
   const handleLogout = () => {
@@ -88,6 +129,9 @@ const DashboardLayout = () => {
                 All Users
               </Link>
             </li>
+
+            {/* shared links */}
+            {sharedLinks}
           </ul>
         </div>
       </div>
