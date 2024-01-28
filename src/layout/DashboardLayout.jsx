@@ -92,7 +92,7 @@ const DashboardLayout = () => {
             {/* Sidebar content here */}
             <li>
               <Link to={"/dashboard"} className="flex justify-start mb-3">
-                <img className="w-20" src={"logo"} />
+                <div className="font-semibold text-3xl">LAPPI</div>
                 <span>
                   <div className="badge badge-primary badge-outline">Admin</div>
                 </span>
