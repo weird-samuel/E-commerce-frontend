@@ -2,16 +2,22 @@ import propTypes from "prop-types";
 import { FaRegUser } from "react-icons/fa";
 import { AuthContext } from "../context/AuthProvider";
 import { useContext } from "react";
+import { enqueueSnackbar } from "notistack";
 
 const Profile = ({ user }) => {
   const { logout } = useContext(AuthContext);
   const handleLogout = () => {
     logout()
       .then(() => {
-        alert("Logged out successfully");
+        enqueueSnackbar("Logged out successfully", {
+          variant: "success",
+        });
       })
       .catch((err) => {
-        alert("Error" + err.message);
+        enqueueSnackbar("Error" + err.message),
+          {
+            variant: "error",
+          };
       });
   };
   return (

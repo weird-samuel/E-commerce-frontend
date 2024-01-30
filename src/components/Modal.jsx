@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
+import { enqueueSnackbar } from "notistack";
 
 const Modal = () => {
   const {
@@ -25,12 +26,15 @@ const Modal = () => {
     login(email, password)
       .then((res) => {
         const user = res.user;
-        alert("Welcome user with email " + user.email);
+        enqueueSnackbar("Welcome user with email " + user.email, {
+          variant: "success",
+        });
         document.getElementById("login_modal").close();
         // navigate(from, { replace: true });
       })
       .catch((err) => {
-        setErrorMessage("Provide valid login details !" || err.message);
+        setErrorMessage("Provide valid login details !");
+        enqueueSnackbar("Error " + err.message, { variant: "error" });
       });
   };
 
@@ -39,11 +43,11 @@ const Modal = () => {
     signupWithGoogle()
       .then((res) => {
         const user = res.user;
-        alert("Welcome " + user.displayName);
+        enqueueSnackbar("Welcome " + user.displayName, { variant: "success" });
         document.getElementById("login_modal").close();
       })
       .catch((err) => {
-        alert("Error" + err.message);
+        enqueueSnackbar("Error" + err.message, { variant: "error" });
       });
   };
 
